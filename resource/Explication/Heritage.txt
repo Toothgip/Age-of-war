@@ -1,0 +1,8 @@
+class Guerrier : public Personnage
+//Signifie : créer une classe Guerrier qui hérite de la classe Personnage
+{
+ 
+};
+
+
+Mettre les classes dans le protected
