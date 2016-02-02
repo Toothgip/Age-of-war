@@ -70,3 +70,9 @@ int main()
     }
     return EXIT_SUCCESS;
 }
+
+    //TODO: Changer commentaire en anglais
+    //TODO: Possibilité de language changer image menu
+    //TODO: Simplifier collision (simplifier les classes ?)
+    //TODO: Resoudre affichage des sprites pour pas que l'image soit coupée
+    //TODO: Ajouter temporisation au début pour l'IA
