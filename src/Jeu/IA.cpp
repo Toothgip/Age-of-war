@@ -8,6 +8,8 @@ IA::IA(): uniteIA(5)
     age = 1;
     nbUnite = 0;
     debut = 0;
+
+    chrono.restart();
 }
 
 Unite* IA::actualiserUnite(Unite* Unitejeu, int position)
@@ -133,10 +135,19 @@ void IA::strategie()
 
 void IA::actualiser()
 {
-    if(chrono.getElapsedTime().asSeconds() >= 2)    //Temporise l'IA
+
+    if(init == true)    //Add delay at the beginning of the game
+    {
+        init = false;
+        chrono.restart();
+    }
+
+    if(chrono.getElapsedTime().asSeconds() >= 2)    //Delay for AI
     {
         this->strategie();
         chrono.restart();
+
+
     }
 
 }

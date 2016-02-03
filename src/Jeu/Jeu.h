@@ -49,6 +49,8 @@ class Jeu
         vector<Unite*> joueur, ia;
 
         int nbJoueur, nbIA, orJoueur, expJoueur, age, expIA;
+
+        bool init;
 };
 
 #endif // JEU_H

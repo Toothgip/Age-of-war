@@ -17,9 +17,11 @@ int main()
     regleTexture.loadFromFile("resource/Menu/Regle.PNG");
     imageRegle.setTexture(regleTexture);
 
+    bool init = true;
+
     Jeu jeu;
 
-    int etape =1;
+    int etape = 1;//Main menu
 
     while (fenetre.isOpen())
     {
@@ -48,21 +50,22 @@ int main()
                 etape = 3;
             }
         }
-        else if(etape == 2) //Affichage du jeu
+        else if(etape == 2) //Draw the game
         {
             jeu.actualiser(fenetre);
             jeu.afficher(fenetre);
 
+
         }
-        else if(etape == 3) //Affichage des regles
+        else if(etape == 3) //The rules
         {
-            fenetre.draw(imageRegle);   //Affiche les regles
+            fenetre.draw(imageRegle);   //Draw the rules
 
             if(sf::Mouse::getPosition(fenetre).x >= 208 && sf::Mouse::getPosition(fenetre).y >= 520 &&      //Bouton pour revenir au menu
                sf::Mouse::getPosition(fenetre).x <= 592 && sf::Mouse::getPosition(fenetre).y <= 543 &&
                sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
-                etape = 1;  //Retour au menu principal
+                etape = 1;  //Return to main menu
             }
         }
 

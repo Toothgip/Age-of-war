@@ -50,6 +50,8 @@ class IA
         vector<Unite*> uniteIA;
         int gold, exp, age, nbUnite, debut;
         sf::Clock chrono, chrono2;
+
+        bool init;
 };
 
 #endif // IA_H

@@ -1,23 +1,24 @@
 #include "Jeu.h"
 
-Jeu::Jeu(): baseJoueur(0, 430, false), baseIA(710, 430, true),  //Initialisation des constructeurs des bases
-bouton1(sf::Vector2f(20, 10), sf::Vector2f(60, 94)), bouton2(sf::Vector2f(120, 10), sf::Vector2f(60, 94)), bouton3(sf::Vector2f(210, 10), sf::Vector2f(65, 94)),
-bouton4(sf::Vector2f(360, 10), sf::Vector2f(75, 75)), //Initialisation des constructeurs des boutons
-joueur(5), ia(5)                                                //Initialisation des tableaux vectoriels
+Jeu::Jeu(): baseJoueur(0, 430, false), baseIA(710, 430, true),  //Initialization of bases
+bouton1(sf::Vector2f(20, 10), sf::Vector2f(60, 94)), bouton2(sf::Vector2f(120, 10), sf::Vector2f(60, 94)),
+bouton3(sf::Vector2f(210, 10), sf::Vector2f(65, 94)),
+bouton4(sf::Vector2f(360, 10), sf::Vector2f(75, 75)), //Initialization of constructors of buttons
+joueur(5), ia(5)                                                //Initialization of vectorial array
 {
     nbJoueur = nbIA = 0;
-    age = 1; // Le jeu commence a l'age 1
+    age = 1; // Game begins at age 1
 
-    textureFond.loadFromFile("resource/Decor/foret.png");     //Texture du fond à l'age 1
-    textureFond2.loadFromFile("resource/Decor/desert.jpg");     //Texture de fond de l'age 2
+    textureFond.loadFromFile("resource/Decor/foret.png");     //Background Texture of age 1
+    textureFond2.loadFromFile("resource/Decor/desert.jpg");     //Background Texture of age 2
     spriteFond.setTexture(textureFond);
 
-    textureMenuUnite.loadFromFile("resource/MenuUnite/MenuUnite.png");    //Image du menu des unités de l'age 1
-    textureMenuUnite2.loadFromFile("resource/MenuUnite/MenuUnite2.png");  //Image du menu des unités de l'age 2
+    textureMenuUnite.loadFromFile("resource/MenuUnite/MenuUnite.png");    //Picture of Menu units age 1
+    textureMenuUnite2.loadFromFile("resource/MenuUnite/MenuUnite2.png");  //Picture of Menu units age 2
     imageMenuUnite.setTexture(textureMenuUnite);
 
 
-    arial.loadFromFile("resource/arial.ttf"); //Chargement police
+    arial.loadFromFile("resource/arial.ttf"); //Load font
     Unitetext.setFont(arial);
 
     Unitetext.setColor(sf::Color::Black);   //Couleur caractère
@@ -39,6 +40,8 @@ joueur(5), ia(5)                                                //Initialisation
 
     orJoueur  = 2000; //Initialisation de l'or et de l'experience
     expJoueur = expIA = 0;
+
+    init = true;
 
 }
 
@@ -422,6 +425,7 @@ void Jeu::afficher(sf::RenderWindow &window)
     {
         window.draw(FinishText);    // Afficher texte de fin
     }
+
 
     for(int i =0; i < 5; i++)
     {
