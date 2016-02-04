@@ -1,7 +1,5 @@
 #include "Main.h"
 #include "Menu/Menu.h"
-#include "Element_Jeu/Unite.h"
-#include "Element_Jeu/Base.h"
 #include "Jeu/Jeu.h"
 
 int main()
@@ -78,4 +76,3 @@ int main()
     //TODO: Possibilité de language changer image menu
     //TODO: Simplifier collision (simplifier les classes ?)
     //TODO: Resoudre affichage des sprites pour pas que l'image soit coupée
-    //TODO: Ajouter temporisation au début pour l'IA
