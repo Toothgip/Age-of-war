@@ -150,8 +150,6 @@ void Jeu::collision()    //Gere les collision entre unités
                         joueur[i]->attaquerBase(baseIA);    //Alors elle attaque
                     }
             }
-
-
     }
 
     for(int i =0; i< 5; i++) //Boucle des unités de la faction IA

@@ -64,8 +64,6 @@ void Base::recevoirdegat(int degat)
 
 }
 
-
-
 sf::IntRect Base::getHitbox()   //Renvoit la Position de la base
 {
     return hitbox;
@@ -107,7 +105,6 @@ void Base::afficher(sf::RenderWindow &window)
     window.draw(imageBase);
 
     window.draw(barreVie);
-
 
     window.draw(textVie);   //Afiiche la vie en nombre
 }

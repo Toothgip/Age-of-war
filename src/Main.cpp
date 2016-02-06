@@ -76,3 +76,6 @@ int main()
     //TODO: Possibilité de language changer image menu
     //TODO: Simplifier collision (simplifier les classes ?)
     //TODO: Resoudre affichage des sprites pour pas que l'image soit coupée
+    //TODO: Ne plus afficher les unite a la queue
+    //TODO: Regrouper methode attaquer dans unite avec ou class abstraite interface target
+    //TODO: AJOUTER des skills
