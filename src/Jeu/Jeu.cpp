@@ -80,7 +80,7 @@ void Jeu::collision()    //Gere les collision entre unités
                             ia[j]->getHitbox( ia[j]->getPortee() ).intersects(joueur[i]->getHitbox()) == true) ||   //Et ils qu'il sont dans la portee
                             ( ia[j]->getHitbox( ia[j]->getPortee() ).contains( joueur[i]->getHitbox().left, joueur[i]->getHitbox().top + 20) ) ) //Ou rentre en collision
                         {
-                            ia[j]->attaquerUnite(joueur[i]); //Attaque entre unité si Unité corps a corps
+                            ia[j]->attaquerTarget(joueur[i]); //Attaque entre unité si Unité corps a corps
 
                             if(joueur[i]->isDead()== true && ia[j-1] != NULL)  //Si l'unité joueur meurt
                             {
@@ -97,7 +97,7 @@ void Jeu::collision()    //Gere les collision entre unités
                                  joueur[i]->getHitbox( joueur[i]->getPortee() ).intersects( ia[j]->getHitbox() ) == true) ||   //Et ils qu'il sont dans la portee
                                  (joueur[i]->getHitbox( joueur[i]->getPortee() ).contains( ia[j]->getHitbox().left, ia[j]->getHitbox().top + 20)) )    //Ou rentre en collision
                         {
-                            joueur[i]->attaquerUnite(ia[j]); //Attaque entre unité si Unité corps a corps
+                            joueur[i]->attaquerTarget(ia[j]); //Attaque entre unité si Unité corps a corps
 
                             if(ia[j]->isDead()== true && joueur[i-1] != NULL)  //Si l'unité joueur meurt
                             {
@@ -112,8 +112,8 @@ void Jeu::collision()    //Gere les collision entre unités
                         if(ia[j]->getHitbox().intersects(joueur[i]->getHitbox()) == true || joueur[i]->getHitbox().intersects(ia[j]->getHitbox())) //Collision entre unité des factions
                         {
 
-                            ia[j]->attaquerUnite(joueur[i]); //Attaque entre unité si Unité corps a corps
-                            joueur[i]->attaquerUnite(ia[j]);
+                            ia[j]->attaquerTarget(joueur[i]); //Attaque entre unité si Unité corps a corps
+                            joueur[i]->attaquerTarget(ia[j]);
 
                             joueur[i]->setMouvement(STOP);     //Les unités arretent d'avancer
                             ia[j]->setMouvement(STOP);
@@ -139,7 +139,7 @@ void Jeu::collision()    //Gere les collision entre unités
                     {
                         if(joueur[i]->estDistance() == false)
                         {
-                            joueur[i]->attaquerBase(baseIA);        //Attaquer la base Joueur
+                            joueur[i]->attaquerTarget(&baseIA);        //Attaquer la base Joueur
                         }
 
                         joueur[i]->setMouvement(STOP);           //Les unités arretent d'avancer
@@ -147,7 +147,7 @@ void Jeu::collision()    //Gere les collision entre unités
                     //Distance
                     if(joueur[i]->estDistance() && joueur[i]->getHitbox( joueur[i]->getPortee() ).intersects( baseIA.getHitbox() ) )    //Si le personne est distance et Base dans sa portee
                     {
-                        joueur[i]->attaquerBase(baseIA);    //Alors elle attaque
+                        joueur[i]->attaquerTarget(&baseIA);    //Alors elle attaque
                     }
             }
     }
@@ -180,7 +180,7 @@ void Jeu::collision()    //Gere les collision entre unités
                     {
                         if(ia[i]->estDistance() == false)   //Si l'unité n'est pas distant
                         {
-                            ia[i]->attaquerBase(baseJoueur);        //Attaquer la base Joueur
+                            ia[i]->attaquerTarget(&baseJoueur);        //Attaquer la base Joueur
                         }
 
                         ia[i]->setMouvement(STOP);           //Les unités arretent d'avancer
@@ -189,7 +189,7 @@ void Jeu::collision()    //Gere les collision entre unités
                     //Distance
                     if(ia[i]->estDistance() && ia[i]->getHitbox( ia[i]->getPortee() ).intersects( baseJoueur.getHitbox() ) )    //Si le personne est distant et la Base est dans sa portee
                     {
-                        ia[i]->attaquerBase(baseJoueur);
+                        ia[i]->attaquerTarget(&baseJoueur);
                     }
                 }
     }

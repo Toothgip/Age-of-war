@@ -2,9 +2,8 @@
 
 
 Base::Base(float positionX, float positionY, bool tourner)
-: barreVie(sf::Vector2f(60, 6)), dead(false), retourner(tourner)
+: barreVie(sf::Vector2f(60, 6)), retourner(tourner)
 {
-
     arial.loadFromFile("resource/arial.ttf");
 
     image.loadFromFile("resource/Base/Grotte.png"); //Texture de l'age 1
@@ -33,7 +32,7 @@ Base::Base(float positionX, float positionY, bool tourner)
     barreVie.setFillColor(sf::Color::Red);
     barreVie.setPosition(positionX+5, positionY - 5);
 
-    vie =1000;
+    vie = 1000;
 
     textVie.setString("1000");   //Flux converti en string et assigné  au texte
 
@@ -47,22 +46,6 @@ Base::Base(float positionX, float positionY, bool tourner)
 
 }
 
-void Base::recevoirdegat(int degat)
-{
-    if(vie >= 0)
-    {
-        if(vie < degat) //Enleve la possibilité de nombre négatif
-        {
-            vie = 0;
-            dead = true;    //La base est morte
-        }
-        else
-        {
-            vie = vie - degat;
-        }
-    }
-
-}
 
 sf::IntRect Base::getHitbox()   //Renvoit la Position de la base
 {
@@ -108,12 +91,6 @@ void Base::afficher(sf::RenderWindow &window)
 
     window.draw(textVie);   //Afiiche la vie en nombre
 }
-
-bool Base::isDead()
-{
-    return dead;
-}
-
 
 Base::~Base()
 {

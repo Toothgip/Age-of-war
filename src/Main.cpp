@@ -77,5 +77,9 @@ int main()
     //TODO: Simplifier collision (simplifier les classes ?)
     //TODO: Resoudre affichage des sprites pour pas que l'image soit coupée
     //TODO: Ne plus afficher les unite a la queue
-    //TODO: Regrouper methode attaquer dans unite avec ou class abstraite interface target
+    //TODO: Regrouper les methodes : getHibox ... dans target
     //TODO: AJOUTER des skills
+    //TODO: Commentaire dans set mouvement dans la class unite
+    //TODO: Renommer les variables en private
+    //TODO: Bug quand un distant acheve une unité alors qu'un cac est aussi en train d'attaquer
+    //TODO: Probleme d'unité qui n'avance pas

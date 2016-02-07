@@ -2,7 +2,10 @@
 #define UNITE_H
 #include "../Main.h"
 #include "Base.h"
-class Unite
+#include "Target.h"
+
+
+class Unite: public Target
 {
     public:
         Unite(string mouvement1, string mouvement2, string mouvement3, string mouvement4);
@@ -21,8 +24,6 @@ class Unite
 
         void setMouvement(bool mouvement);
 
-        bool isDead();
-
         bool estDistance();
 
         int getPortee();
@@ -39,9 +40,7 @@ class Unite
 
         void deplacer();
 
-        void attaquerBase(Base &base);
-
-        void attaquerUnite(Unite *unite);
+        void attaquerTarget(Target *target);
 
         void animationDeplacer();
 
@@ -52,9 +51,9 @@ class Unite
         virtual ~Unite();
     protected:
 
-        int vie, vitesse, puissanceAttaque, selected, faction, portee, value, prix;
+        int  vitesse, puissanceAttaque, selected, faction, portee, value, prix;
         float tempsAttaque;
-        bool mouvement, attaque, dead, affichage;
+        bool mouvement, attaque, affichage;
 
         sf::Image imageBonhomme, imageBonhomme2, imageBonhommeAttaque, imageBonhommeAttaque2;
         sf::Texture TextureBonhomme, TextureBonhomme2, TextureBonhommeAttaque, TextureBonhommeAttaque2;

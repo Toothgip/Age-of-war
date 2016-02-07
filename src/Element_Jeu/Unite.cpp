@@ -1,7 +1,10 @@
 #include "Unite.h"
 
-Unite::Unite(string mouvement1, string mouvement2, string mouvement3, string mouvement4) : mouvement(true), selected(0), attaque(false), dead(false), barredeVie(sf::Vector2f(60, 3)), affichage(false)
+Unite::Unite(string mouvement1, string mouvement2, string mouvement3, string mouvement4)
+: mouvement(true), selected(0), attaque(false), barredeVie(sf::Vector2f(60, 3))
 {
+    affichage = false; //Initialize the boolean for know if the health bar need to be draw
+
     imageBonhomme.loadFromFile(mouvement1);         //Charge toutes les images
     imageBonhomme2.loadFromFile(mouvement2);
     imageBonhommeAttaque.loadFromFile(mouvement3);
@@ -84,41 +87,22 @@ sf::IntRect Unite::getHitbox(int portee)
     return hitboxPortee;
 }
 
-
-void Unite::attaquerBase(Base &base)
-{
-    if(chrono.getElapsedTime().asSeconds() >= tempsAttaque)
-    {
-        base.recevoirdegat(puissanceAttaque);
-        chrono.restart();
-        this->animationAttaquer();
-    }
-}
-
 void Unite::receveoirdegat(int degat)
 {
-    if(vie < degat) //Enleve la possibilité de nombre négatif si la vie de l'unité est inferieur au dégats subis
-    {
-        vie = 0;
-        dead = true;    //L'unité est morte
-    }
-    else
-    {
-        vie = vie - degat;
-    }
+    Target::receveoirdegat(degat);
     affichage = true; //Active l'affichage de la barre de vie
 }
 
-void Unite::attaquerUnite(Unite *unite)
+void Unite::attaquerTarget(Target *target)
 {
-    if(chrono.getElapsedTime().asSeconds() >= tempsAttaque && unite != NULL)
+    if(chrono.getElapsedTime().asSeconds() >= tempsAttaque && target != NULL)
     {
-        unite->receveoirdegat(puissanceAttaque);
+        target->receveoirdegat(puissanceAttaque);
         chrono.restart();
 
         this->animationAttaquer();
 
-        if(unite->isDead() == true) //Si l'unité morte alors
+        if(target->isDead() == true) //Si l'unité morte alors
         {
             attaque = false;    //L'unite n'attaque plus
         }
@@ -212,10 +196,6 @@ bool Unite::getAttaque()
     return attaque;
 }
 
-bool Unite::isDead()
-{
-    return dead;
-}
 
 bool Unite::estDistance()
 {
@@ -228,7 +208,6 @@ bool Unite::estDistance()
         return true;
     }
 }
-
 
 int Unite::getPortee()
 {

@@ -1,8 +1,9 @@
 #ifndef BASE_H
 #define BASE_H
 #include "../Main.h"
+#include "Target.h"
 
-class Base
+class Base: public Target
 {
     public:
 
@@ -10,8 +11,6 @@ class Base
 
 
         void afficher(sf::RenderWindow &window);
-
-        void recevoirdegat(int degat);
 
         sf::IntRect getHitbox();
 
@@ -21,12 +20,9 @@ class Base
 
         void actualiser();
 
-        bool isDead(); // Verifie si la base est morte ou non
-
         virtual ~Base();
     protected:
     private:
-        int vie;
         sf::Sprite imageBase;
         sf::Texture TextureBase, TextureBaseAge2;
         sf::RectangleShape barreVie;
@@ -39,8 +35,6 @@ class Base
         sf::IntRect hitbox;
 
         stringstream flux;  //Flux qui permet de convertir tout en string
-
-        bool dead;
 };
 
 #endif // BASE_H
