@@ -32,7 +32,7 @@ class Base: public Target
 
         bool retourner;
 
-        sf::IntRect hitbox;
+       sf::IntRect hitbox;
 
         stringstream flux;  //Flux qui permet de convertir tout en string
 };

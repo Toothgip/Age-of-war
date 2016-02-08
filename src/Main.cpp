@@ -71,15 +71,26 @@ int main()
     }
     return EXIT_SUCCESS;
 }
-
+    //General
     //TODO: Changer commentaire en anglais
-    //TODO: Possibilité de language changer image menu
-    //TODO: Simplifier collision (simplifier les classes ?)
-    //TODO: Resoudre affichage des sprites pour pas que l'image soit coupée
-    //TODO: Ne plus afficher les unite a la queue
-    //TODO: Regrouper les methodes : getHibox ... dans target
-    //TODO: AJOUTER des skills
-    //TODO: Commentaire dans set mouvement dans la class unite
     //TODO: Renommer les variables en private
+    //TODO: Possibilité de language changer image menu
+
+    //CLASS UNITE
+    //TODO: Bug d'animation d'attaque
+    //TODO: Commentaire dans set mouvement dans la class unite
+     //TODO: Resoudre affichage des sprites pour pas que l'image soit coupée
+
+    //CLASS JEU
+    //TODO: Changer le type de la var gold et exp ?
+    //TODO: Optimiser gestion de flux dans la methode actualiser
+    //TODO: Probleme d'unité qui n'avance pas (collision ?)
+    //TODO: Simplifier collision (simplifier les classes ?)
+    //TODO: AJOUTER des skills
     //TODO: Bug quand un distant acheve une unité alors qu'un cac est aussi en train d'attaquer
-    //TODO: Probleme d'unité qui n'avance pas
+    //TODO: Ne plus afficher les unite a la queue mais en decalmer en hauteur
+
+    //CLASS IA
+    //TODO: Ajoute temporisation entre chaque unité de l'IA FAIRE UN THREAD !!!
+    //TODO: Continuer de creer des unité pour l'ia meme si les siennes sont pas mortes
+    //TODO: Ameliore le actualiserUnite probleme de cast

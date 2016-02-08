@@ -24,13 +24,9 @@ class IA
 
         Unite* actualiserUnite(Unite* Unitejeu, int position);//Ajouté au jeu
 
-        int actualiserGold();   //Sert a quoi
-
-        int actualiserNbUnite();    //Ajouté au jeu
-
         void ajouterGold(int goldGagner);   //Ajouté au jeu
 
-        void actualiserExp(int expJeu); //Ajouté au jeu
+       void synchronize(int *nbUniteJeu, int *expJeu);
 
         void mortUnite(Unite* Unitejeu, int position);   //Ajouté au jeu
 
@@ -49,7 +45,7 @@ class IA
     private:
         vector<Unite*> uniteIA;
         int gold, exp, age, nbUnite, debut;
-        sf::Clock chrono, chrono2;
+        sf::Clock chronoStrat, chronoUnite;
 
         bool init;
 };

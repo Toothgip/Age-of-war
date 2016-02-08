@@ -9,7 +9,7 @@ IA::IA(): uniteIA(5)
     nbUnite = 0;
     debut = 0;
 
-    chrono.restart();
+    chronoStrat.restart();
 }
 
 Unite* IA::actualiserUnite(Unite* Unitejeu, int position)
@@ -19,24 +19,16 @@ Unite* IA::actualiserUnite(Unite* Unitejeu, int position)
     return Unitejeu;
 }
 
-int IA::actualiserGold()
+void IA::synchronize(int *nbUniteJeu, int *expJeu)
 {
-    return gold;
-}
+    *nbUniteJeu = nbUnite; //Update number of unit
 
-int IA::actualiserNbUnite() //Actualise le nombre d'unité avec le jeu
-{
-    return nbUnite;
+    *expJeu = exp;
 }
 
 void IA::ajouterGold(int goldGagner)
 {
-    gold += goldGagner;     //Ajouter l'or gagné
-}
-
-void IA::actualiserExp(int expJeu)  //Actualise le nombre d'expérience avec le jeu
-{
-    exp = expJeu;
+    gold += goldGagner;     //Add gold win by killing units
 }
 
 void IA::mortUnite(Unite* Unitejeu, int position)    //Lorsque une unité IA meur
@@ -136,59 +128,57 @@ void IA::strategie()
 void IA::actualiser()
 {
 
-    if(init == true)    //Add delay at the beginning of the game
+    if(init == true)    //Add delay at the beginning of the game and between spawning of unit
     {
         init = false;
-        chrono.restart();
+        chronoStrat.restart();
+        chronoUnite.restart();
     }
 
-    if(chrono.getElapsedTime().asSeconds() >= 2)    //Delay for AI
+    if(chronoStrat.getElapsedTime().asSeconds() >= 2)    //Delay for AI
     {
         this->strategie();
-        chrono.restart();
-
-
+        chronoStrat.restart();
     }
-
 }
 
 
 void IA::creerUnite(int typeUnite)
 {
-        for(int i = 0; i < 5; i++)
+    for(int i = 0; i < 5; i++)
+    {
+        if(uniteIA[i] == NULL)
         {
-            if(uniteIA[i] == NULL)
+            switch(typeUnite)
             {
-                switch(typeUnite)
-                {
-                    case HOMMES:
-                       uniteIA[i] = new Homme();
-                    break;
-                    case ARCHERS:
-                       uniteIA[i] = new Archer();
-                    break;
-                    case GUERRIERS:
-                       uniteIA[i] = new Guerrier();
-                    break;
-                    case ASSASINS:
-                       uniteIA[i] = new Assasin();
-                    break;
-                    case TIREURS:
-                       uniteIA[i] = new Tireur();
-                    break;
-                    case TANKS:
-                       uniteIA[i] = new Tank();
-                    break;
-                }
-
-                gold -= uniteIA[i]->getPrix();
-                nbUnite ++;
-
-                uniteIA[i]->setFaction(IAFACTION);  //L'unité est de la faction IA
+                case HOMMES:
+                    uniteIA[i] = new Homme();
                 break;
-
+                case ARCHERS:
+                    uniteIA[i] = new Archer();
+                break;
+                case GUERRIERS:
+                    uniteIA[i] = new Guerrier();
+                break;
+                case ASSASINS:
+                    uniteIA[i] = new Assasin();
+                break;
+                case TIREURS:
+                    uniteIA[i] = new Tireur();
+                break;
+                case TANKS:
+                    uniteIA[i] = new Tank();
+                break;
             }
+
+            gold -= uniteIA[i]->getPrix();
+            nbUnite ++;
+
+            uniteIA[i]->setFaction(IAFACTION);  //L'unité est de la faction IA
+            break;
+
         }
+    }
 }
 
 void IA::changementAge()

@@ -384,9 +384,9 @@ void Jeu::actualiser(sf::RenderWindow &window)
         ExpText.setString(flux.str());
         flux.str("");
 
-        nbIA = ordinateur.actualiserNbUnite();  //Actualisation du nombre d'unités de l'ia
-        ordinateur.actualiserExp(expIA); //Actualise les points d'expériences
+        ordinateur.synchronize(&nbIA, &expIA);
 
+        printf("%d", nbIA);
     }
 
     else if(baseJoueur.isDead() == true)     //Si le joueur perd
