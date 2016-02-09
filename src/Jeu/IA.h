@@ -26,7 +26,7 @@ class IA
 
         void ajouterGold(int goldGagner);   //Ajouté au jeu
 
-       void synchronize(int *nbUniteJeu, int *expJeu);
+        void synchronize(int *nbUniteJeu);
 
         void mortUnite(Unite* Unitejeu, int position);   //Ajouté au jeu
 
@@ -44,7 +44,7 @@ class IA
     protected:
     private:
         vector<Unite*> uniteIA;
-        int gold, exp, age, nbUnite, debut;
+        int gold, age, nbUnite, debut;
         sf::Clock chronoStrat, chronoUnite;
 
         bool init;

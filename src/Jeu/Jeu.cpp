@@ -73,8 +73,6 @@ void Jeu::collision()    //Gere les collision entre unités
             //Attaque de faction differentes
                     if(ia[j] != NULL && joueur[i] != NULL)   //Si les unités existent
                     {
-
-
                         //Distance
                         if( (ia[j]->estDistance() == true &&   //Si IA distant
                             ia[j]->getHitbox( ia[j]->getPortee() ).intersects(joueur[i]->getHitbox()) == true) ||   //Et ils qu'il sont dans la portee
@@ -90,7 +88,6 @@ void Jeu::collision()    //Gere les collision entre unités
                             {
                                 ia[j-2]->setMouvement(AVANCE);    //L'unité IA avance
                             }
-
                         }
 
                         if ( (joueur[i]->estDistance() == true &&  //Si Joueur distant
@@ -200,12 +197,12 @@ Unite* Jeu::mortUnite(Unite *uniteMorte)
     if(uniteMorte->getFaction() == JOUEUR)   //Si l'unité morte est de la faction joueur
     {
         ordinateur.ajouterGold(uniteMorte->getValue()); //Ajoute de l'or et exp a l'ia
-        expJoueur += uniteMorte->getValue()/2;  //Recupere la valeur de l'unité
+        expIA += uniteMorte->getValue()/2;  //Recupere la valeur de l'unité
         nbJoueur --;
     }
     else if(uniteMorte->getFaction() == IAFACTION)  //Si l'unité morte est de la faction IA
     {
-                                            //Ajoute de l'or et exp aux joueur
+        //Ajoute de l'or et exp aux joueur
         orJoueur = orJoueur + uniteMorte->getValue();
         expJoueur = expJoueur + uniteMorte->getValue()/2;  //Recupere la valeur de l'unité
     }
@@ -342,67 +339,71 @@ void Jeu::actualiser(sf::RenderWindow &window)
 
         this->collision();
 
-        ordinateur.actualiser(); //L'IA est actualiser et demarre sa strategie
+        ordinateur.actualiser(); //IA is update and do his startegy
 
-        if(ordinateur.getAge() == 1 && expIA >= 1200)   //Si l'IA est a l'age et a l'exp necessaire alors changement d'age
+        if(ordinateur.getAge() == 1 && expIA >= 1200)  //If AI have necessary exp age ->2
         {
-            ordinateur.changementAge();
-            baseIA.ameliorer();
+            ordinateur.changementAge(); //Update the available units for AI
+            baseIA.ameliorer();     //Upgrade AI base
         }
 
         for(int i =0; i < 5; i++)
         {
-            if(joueur[i] != NULL && joueur[i]->isDead() == true)//Si l'unité existe et n'a plus de vie
+            //UPDATE PLAYERS'S UNIT
+
+            if(joueur[i] != NULL) //If unit exist
             {
-                joueur[i] = mortUnite(joueur[i]);
-            }
-            else if(ia[i] != NULL && ia[i]->isDead() == true)
-            {
-                ia[i] = mortUnite(ia[i]);
-                ordinateur.mortUnite(ia[i], i);
+                if(joueur[i]->isDead() == true) //If unit have no life
+                {
+                    joueur[i] = mortUnite(joueur[i]);   //Destruct unit
+                }
+                else
+                {
+                    joueur[i]->actualiser();   //Update her
+                }
             }
 
-            if(joueur[i] != NULL)   //Si La case n'est pas vide alors unité et elle est acualiser
-            {
-                joueur[i]->actualiser();
-            }
+            //UPDATE AI'S UNIT
+            ia[i] = ordinateur.actualiserUnite(ia[i], i);   //Update unite spawned by IA class
 
-            ia[i] = ordinateur.actualiserUnite(ia[i], i);   //Actualise les apparitions des unités de l'IA
-
-            if(ia[i] != NULL)   //Si La case n'est pas vide alors l'unité  est acualiser
+            if(ia[i] != NULL ) //If unit exist
             {
-                ia[i]->actualiser();
+                if(ia[i]->isDead() == true) //If unit have no life
+                {
+                    ia[i] = mortUnite(ia[i]);  //Destruct unit
+                    ordinateur.mortUnite(ia[i], i); //Update number of unite in AI class
+                }
+                else
+                {
+                    ia[i]->actualiser();
+                }
             }
         }
 
+        //UPDATE TEXT GOLD AND EXP
+        flux << orJoueur;   //Store gold
+        orText.setString(flux.str()); //Convert number as string
+        flux.str("");   //Reset Flux
 
-        flux << orJoueur;
-        orText.setString(flux.str());
-        flux.str("");   //Reinitialisation du flux
+        flux << expJoueur; //Store exp
+        ExpText.setString(flux.str()); //Convert number as string
+        flux.str("");  //Reset Flux
 
-        flux << expJoueur;
-        ExpText.setString(flux.str());
-        flux.str("");
-
-        ordinateur.synchronize(&nbIA, &expIA);
-
-        printf("%d", nbIA);
+        ordinateur.synchronize(&nbIA); //Recover number of unit of AI
     }
 
-    else if(baseJoueur.isDead() == true)     //Si le joueur perd
+    else if(baseJoueur.isDead() == true)     //If player loose
     {
         FinishText.setColor(sf::Color::Red);
         FinishText.setString("Defaite");
     }
 
-    else if(baseIA.isDead() == true)     //Si le joueur gagne
+    else if(baseIA.isDead() == true)     //If player win
     {
         FinishText.setColor(sf::Color::Yellow);
         FinishText.setString("Victoire");
     }
-
 }
-
 
 void Jeu::afficher(sf::RenderWindow &window)
 {
@@ -451,9 +452,7 @@ void Jeu::afficher(sf::RenderWindow &window)
     window.draw(Unitetext); //Texte du nb d'unité
 }
 
-
-
-Jeu::~Jeu() //Destructeur
+Jeu::~Jeu() //Destructor
 {
 
 }

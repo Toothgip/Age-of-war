@@ -6,7 +6,6 @@ int main()
 {
     // Create the main window
     sf::RenderWindow fenetre(sf::VideoMode(800, 600), "Thomas's window");
-    Menu menuPrincipal;
     fenetre.setFramerateLimit(50);
 
     sf::Texture regleTexture;
@@ -15,8 +14,7 @@ int main()
     regleTexture.loadFromFile("resource/Menu/Regle.PNG");
     imageRegle.setTexture(regleTexture);
 
-    bool init = true;
-
+    Menu menuPrincipal;
     Jeu jeu;
 
     int etape = 1;//Main menu
@@ -52,8 +50,6 @@ int main()
         {
             jeu.actualiser(fenetre);
             jeu.afficher(fenetre);
-
-
         }
         else if(etape == 3) //The rules
         {
@@ -75,6 +71,8 @@ int main()
     //TODO: Changer commentaire en anglais
     //TODO: Renommer les variables en private
     //TODO: Possibilité de language changer image menu
+    //TODO: Optimiser le code eviter test inutiles, variables inutile ...
+    //TODO: Enlever les boucles d'include
 
     //CLASS UNITE
     //TODO: Bug d'animation d'attaque
@@ -83,12 +81,12 @@ int main()
 
     //CLASS JEU
     //TODO: Changer le type de la var gold et exp ?
-    //TODO: Optimiser gestion de flux dans la methode actualiser
     //TODO: Probleme d'unité qui n'avance pas (collision ?)
     //TODO: Simplifier collision (simplifier les classes ?)
     //TODO: AJOUTER des skills
     //TODO: Bug quand un distant acheve une unité alors qu'un cac est aussi en train d'attaquer
     //TODO: Ne plus afficher les unite a la queue mais en decalmer en hauteur
+    //TODO: Gagner de l'or en fonction du temps
 
     //CLASS IA
     //TODO: Ajoute temporisation entre chaque unité de l'IA FAIRE UN THREAD !!!

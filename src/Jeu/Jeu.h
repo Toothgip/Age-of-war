@@ -1,20 +1,9 @@
 #ifndef JEU_H
 #define JEU_H
 
-#include "../Main.h"
-#include "../Element_Jeu/Base.h"
-//#include "Unite.h"
-#include "../Menu/BoutonUnite.h"
-#include "IA.h"
-
-#include "../Element_Jeu/Homme.h"
-#include "../Element_Jeu/Archer.h"
-#include "../Element_Jeu/Guerrier.h"
-#include "../Element_Jeu/Assasin.h"
-#include "../Element_Jeu/Tireur.h"
-#include "../Element_Jeu/Tank.h"
-
-
+#include "../Element_Jeu/Base.h"    //Main.h is included
+#include "../Menu/BoutonUnite.h"    //Unit class is included
+#include "IA.h" //Units of age 1 and age2 are already included
 
 class Jeu
 {

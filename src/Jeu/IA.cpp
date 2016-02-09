@@ -4,7 +4,6 @@ IA::IA(): uniteIA(5)
 {
     //Initialisation de l'or et de l'experience au meme niveau que le joueur
     gold = 2000;
-    exp = 0;
     age = 1;
     nbUnite = 0;
     debut = 0;
@@ -19,11 +18,9 @@ Unite* IA::actualiserUnite(Unite* Unitejeu, int position)
     return Unitejeu;
 }
 
-void IA::synchronize(int *nbUniteJeu, int *expJeu)
+void IA::synchronize(int *nbUniteJeu)
 {
     *nbUniteJeu = nbUnite; //Update number of unit
-
-    *expJeu = exp;
 }
 
 void IA::ajouterGold(int goldGagner)
@@ -142,7 +139,6 @@ void IA::actualiser()
     }
 }
 
-
 void IA::creerUnite(int typeUnite)
 {
     for(int i = 0; i < 5; i++)
@@ -183,7 +179,6 @@ void IA::creerUnite(int typeUnite)
 
 void IA::changementAge()
 {
-    exp -= 1200; //Enleve 1200 a l'exp de l'ia pour passer l'age suivant
     age = 2;
 }
 
