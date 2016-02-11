@@ -3,8 +3,7 @@
 Jeu::Jeu(): baseJoueur(0, 430, false), baseIA(710, 430, true),  //Initialization of bases
 bouton1(sf::Vector2f(20, 10), sf::Vector2f(60, 94)), bouton2(sf::Vector2f(120, 10), sf::Vector2f(60, 94)),
 bouton3(sf::Vector2f(210, 10), sf::Vector2f(65, 94)),
-bouton4(sf::Vector2f(360, 10), sf::Vector2f(75, 75)), //Initialization of constructors of buttons
-joueur(5), ia(5)                                                //Initialization of vectorial array
+bouton4(sf::Vector2f(360, 10), sf::Vector2f(75, 75)) //Initialization of constructors of buttons
 {
     nbJoueur = nbIA = 0;
     age = 1; // Game begins at age 1
@@ -16,7 +15,6 @@ joueur(5), ia(5)                                                //Initialization
     textureMenuUnite.loadFromFile("resource/MenuUnite/MenuUnite.png");    //Picture of Menu units age 1
     textureMenuUnite2.loadFromFile("resource/MenuUnite/MenuUnite2.png");  //Picture of Menu units age 2
     imageMenuUnite.setTexture(textureMenuUnite);
-
 
     arial.loadFromFile("resource/arial.ttf"); //Load font
     Unitetext.setFont(arial);
@@ -43,11 +41,16 @@ joueur(5), ia(5)                                                //Initialization
 
     init = true;
 
+    for(int i =0; i < MAX_UNIT; i++)   //Initialize unit of two faction to NULL
+    {
+        joueur[i] = NULL;
+        ia[i]= NULL;
+    }
 }
 
 void Jeu::collision()    //Gere les collision entre unités
 {
-    for(int i = 0; i < 5; i++) //Boucle des unités de la faction joueur
+    for(int i = 0; i < MAX_UNIT; i++) //Boucle des unités de la faction joueur
     {
         //Collision entre unité
                 if(joueur[i] != NULL && joueur[i+1] != NULL && i < 4) //Si les unités existent et verifie la collision jusqu'a l'avant derniere
@@ -68,7 +71,7 @@ void Jeu::collision()    //Gere les collision entre unités
                     joueur[i+1]->setMouvement(AVANCE);          //l'unité repart
                 }
 
-        for(int j = 0; j < 5; j++)
+        for(int j = 0; j < MAX_UNIT; j++)
         {
             //Attaque de faction differentes
                     if(ia[j] != NULL && joueur[i] != NULL)   //Si les unités existent
@@ -149,7 +152,7 @@ void Jeu::collision()    //Gere les collision entre unités
             }
     }
 
-    for(int i =0; i< 5; i++) //Boucle des unités de la faction IA
+    for(int i =0; i< MAX_UNIT; i++) //Boucle des unités de la faction IA
     {
         //Collision entre unité de meme faction IA
                 if(ia[i] != NULL && ia[i+1] != NULL && i < 4)    //Si les unités existent et verifie la collision jusqu'a l'avant derniere
@@ -206,7 +209,6 @@ Unite* Jeu::mortUnite(Unite *uniteMorte)
         orJoueur = orJoueur + uniteMorte->getValue();
         expJoueur = expJoueur + uniteMorte->getValue()/2;  //Recupere la valeur de l'unité
     }
-    uniteMorte->~Unite();   //Destruction de l'objet
     uniteMorte = NULL;
 
     return uniteMorte;
@@ -214,14 +216,14 @@ Unite* Jeu::mortUnite(Unite *uniteMorte)
 
 void Jeu::MenuUnite(sf::RenderWindow &window)   //Gere le menu en haut à gauche avec la cration d'unité
 {
-    if(nbJoueur < 5)    //Si le nombre d'unité max n'est pas atteint
+    if(nbJoueur < MAX_UNIT)    //Si le nombre d'unité max n'est pas atteint
     {
         if( (bouton1.actualiser(window) == true) &&
           (orJoueur >= 190 && age == 1 || orJoueur >= 450 && age == 2)  )  //Si on clique sur le bouton de l'homme ou de l'assasin et qu'il y a l'or necessaire
         {
             if(age == 1)    //Alors création de l'unité suivant l'age actuel
             {
-                for(int i = 0; i < 5; i++)
+                for(int i = 0; i < MAX_UNIT; i++)
                 {
                     if(joueur[i] == NULL)   //Si il n'ya pas d'unité a la case i
                     {
@@ -234,7 +236,7 @@ void Jeu::MenuUnite(sf::RenderWindow &window)   //Gere le menu en haut à gauche 
             }
             else if(age == 2)
             {
-                for(int i = 0; i < 5; i++)
+                for(int i = 0; i < MAX_UNIT; i++)
                 {
                     if(joueur[i] == NULL)   //Si il n'ya pas d'unité a la case i
                     {
@@ -253,7 +255,7 @@ void Jeu::MenuUnite(sf::RenderWindow &window)   //Gere le menu en haut à gauche 
         {
             if(age == 1)    //Alors création de l'unité suivant l'age actuel
             {
-                for(int i = 0; i < 5; i++)
+                for(int i = 0; i < MAX_UNIT; i++)
                 {
                     if(joueur[i] == NULL)   //Si il n'ya pas d'unité a la case i
                     {
@@ -266,7 +268,7 @@ void Jeu::MenuUnite(sf::RenderWindow &window)   //Gere le menu en haut à gauche 
             }
             else if(age == 2)
             {
-                for(int i = 0; i < 5; i++)
+                for(int i = 0; i < MAX_UNIT; i++)
                 {
                     if(joueur[i] == NULL)   //Si il n'ya pas d'unité a la case i
                     {
@@ -285,7 +287,7 @@ void Jeu::MenuUnite(sf::RenderWindow &window)   //Gere le menu en haut à gauche 
         {
             if(age == 1)   //Alors création de l'unité suivant l'age actuel
             {
-                for(int i = 0; i < 5; i++)
+                for(int i = 0; i < MAX_UNIT; i++)
                 {
                     if(joueur[i] == NULL)   //Si il n'ya pas d'unité a la case i
                     {
@@ -298,7 +300,7 @@ void Jeu::MenuUnite(sf::RenderWindow &window)   //Gere le menu en haut à gauche 
             }
             else if(age == 2)
             {
-                for(int i = 0; i < 5; i++)
+                for(int i = 0; i < MAX_UNIT; i++)
                 {
                     if(joueur[i] == NULL)   //Si il n'ya pas d'unité a la case i
                     {
@@ -347,7 +349,7 @@ void Jeu::actualiser(sf::RenderWindow &window)
             baseIA.ameliorer();     //Upgrade AI base
         }
 
-        for(int i =0; i < 5; i++)
+        for(int i =0; i < MAX_UNIT; i++)
         {
             //UPDATE PLAYERS'S UNIT
 
@@ -364,7 +366,7 @@ void Jeu::actualiser(sf::RenderWindow &window)
             }
 
             //UPDATE AI'S UNIT
-            ia[i] = ordinateur.actualiserUnite(ia[i], i);   //Update unite spawned by IA class
+           ia[i] = ordinateur.actualiserUnite(ia[i], i);   //Update unite spawned by IA class
 
             if(ia[i] != NULL ) //If unit exist
             {
@@ -426,7 +428,7 @@ void Jeu::afficher(sf::RenderWindow &window)
     }
 
 
-    for(int i =0; i < 5; i++)
+    for(int i =0; i < MAX_UNIT; i++)
     {
         if(ia[i] != NULL)   //Si La case n'est pas vide alors unité et elle est afficher
         {
@@ -435,7 +437,7 @@ void Jeu::afficher(sf::RenderWindow &window)
     }
 
 
-    for(int i =0; i < 5; i++)
+    for(int i =0; i < MAX_UNIT; i++)
     {
         if(joueur[i] != NULL)   //Si La case n'est pas vide alors unité et elle est afficher
         {

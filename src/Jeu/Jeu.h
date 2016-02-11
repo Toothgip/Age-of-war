@@ -35,7 +35,8 @@ class Jeu
         IA ordinateur;
         Base baseJoueur, baseIA;
         BoutonUnite bouton1, bouton2, bouton3, bouton4;
-        vector<Unite*> joueur, ia;
+
+        Unite *joueur[MAX_UNIT], *ia[MAX_UNIT];
 
         int nbJoueur, nbIA, orJoueur, expJoueur, age, expIA;
 

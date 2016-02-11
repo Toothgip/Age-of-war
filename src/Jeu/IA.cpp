@@ -1,6 +1,6 @@
 #include "IA.h"
 
-IA::IA(): uniteIA(5)
+IA::IA()
 {
     //Initialisation de l'or et de l'experience au meme niveau que le joueur
     gold = 2000;
@@ -8,12 +8,17 @@ IA::IA(): uniteIA(5)
     nbUnite = 0;
     debut = 0;
 
+    for(int i =0; i < MAX_UNIT; i++)   //Initialize unit to NULL
+    {
+        uniteIa[i]= NULL;
+    }
+
     chronoStrat.restart();
 }
 
 Unite* IA::actualiserUnite(Unite* Unitejeu, int position)
 {
-    Unitejeu = uniteIA[position];   //Actualise les unités
+    Unitejeu = uniteIa[position];   //Actualise les unités
 
     return Unitejeu;
 }
@@ -30,7 +35,7 @@ void IA::ajouterGold(int goldGagner)
 
 void IA::mortUnite(Unite* Unitejeu, int position)    //Lorsque une unité IA meur
 {
-    uniteIA[position] =  Unitejeu;
+    uniteIa[position] =  Unitejeu;
     nbUnite --; //Enleve une unité
 }
 
@@ -141,36 +146,36 @@ void IA::actualiser()
 
 void IA::creerUnite(int typeUnite)
 {
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < MAX_UNIT; i++)
     {
-        if(uniteIA[i] == NULL)
+        if(uniteIa[i] == NULL)
         {
             switch(typeUnite)
             {
                 case HOMMES:
-                    uniteIA[i] = new Homme();
+                    uniteIa[i] = new Homme();
                 break;
                 case ARCHERS:
-                    uniteIA[i] = new Archer();
+                    uniteIa[i] = new Archer();
                 break;
                 case GUERRIERS:
-                    uniteIA[i] = new Guerrier();
+                    uniteIa[i] = new Guerrier();
                 break;
                 case ASSASINS:
-                    uniteIA[i] = new Assasin();
+                    uniteIa[i] = new Assasin();
                 break;
                 case TIREURS:
-                    uniteIA[i] = new Tireur();
+                    uniteIa[i] = new Tireur();
                 break;
                 case TANKS:
-                    uniteIA[i] = new Tank();
+                    uniteIa[i] = new Tank();
                 break;
             }
 
-            gold -= uniteIA[i]->getPrix();
+            gold -= uniteIa[i]->getPrix();
             nbUnite ++;
 
-            uniteIA[i]->setFaction(IAFACTION);  //L'unité est de la faction IA
+            uniteIa[i]->setFaction(IAFACTION);  //L'unité est de la faction IA
             break;
 
         }

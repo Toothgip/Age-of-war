@@ -73,6 +73,7 @@ int main()
     //TODO: Possibilité de language changer image menu
     //TODO: Optimiser le code eviter test inutiles, variables inutile ...
     //TODO: Enlever les boucles d'include
+    //TODO:Renommer les h en a hpp
 
     //CLASS UNITE
     //TODO: Bug d'animation d'attaque
@@ -91,4 +92,3 @@ int main()
     //CLASS IA
     //TODO: Ajoute temporisation entre chaque unité de l'IA FAIRE UN THREAD !!!
     //TODO: Continuer de creer des unité pour l'ia meme si les siennes sont pas mortes
-    //TODO: Ameliore le actualiserUnite probleme de cast

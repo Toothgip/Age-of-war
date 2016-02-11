@@ -43,7 +43,8 @@ class IA
         virtual ~IA();
     protected:
     private:
-        vector<Unite*> uniteIA;
+        Unite *uniteIa[5];
+
         int gold, age, nbUnite, debut;
         sf::Clock chronoStrat, chronoUnite;
 
