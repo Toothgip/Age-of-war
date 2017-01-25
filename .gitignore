@@ -22,3 +22,7 @@
 *.cbp
 *.layout
 *.depend
+
+# Compilation directory
+bin/*
+obj/*
