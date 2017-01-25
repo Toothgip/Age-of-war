@@ -6,3 +6,5 @@ You played against an AI, the goal is destroyed the AI base and you base need to
 For it you have some gold that you can use for recruit unit for destroy AI base.
 
 The games is written is C++ with the SFML library : https://github.com/SFML/SFML
+
+If you want to run the game lanch the Age of War.exe in the root directory
